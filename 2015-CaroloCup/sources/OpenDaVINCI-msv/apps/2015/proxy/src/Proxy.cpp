@@ -89,9 +89,9 @@ void Proxy::setUp() {
 				uint32_t>("global.buffer.numberOfMemorySegments");
 
 		// Run recorder in asynchronous mode to allow real-time recording in background.
-               const bool THREADING = true;
+            //   const bool THREADING = true;
  
-               m_recorder = new Recorder(recordingURL.str(), MEMORY_SEGMENT_SIZE, NUMBER_OF_SEGMENTS, THREADING);
+               m_recorder = new Recorder(recordingURL.str(), MEMORY_SEGMENT_SIZE, NUMBER_OF_SEGMENTS);
 
 	}
 
@@ -134,6 +134,7 @@ void Proxy::nextString(const string &s)
 	int posIstr=s.find(':');
 	int posUstr=s.find(':',posIstr+1);
 	int posLstr=s.find(':',posUstr+1);
+if(posIstr<0||posUstr<0||posLstr<0){return;}
 	int posI = s.find('i');
 	string iStr=s.substr(posI,posIstr);
 	string uStr=s.substr(posIstr+1,posUstr-posIstr);

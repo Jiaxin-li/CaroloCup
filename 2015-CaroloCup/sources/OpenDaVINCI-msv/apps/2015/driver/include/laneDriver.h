@@ -60,8 +60,13 @@ namespace msv {
     private:
       virtual void setUp();
       virtual void tearDown();
+    float
+    calculateDesiredHeading (float oldLateralError);
+
+    void calculateErr(CustomLine ,CustomLine ,float *, double *);
 
       bool m_hasReceivedLaneDetectionData;
+      bool after_intersection;
 
       // Define control parameters
       float m_controlGains[3];	//For feedback linearization controller

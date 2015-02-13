@@ -22,12 +22,15 @@ namespace msv {
 	using namespace cv;
 
 	LaneDetectionData::LaneDetectionData() :
-		m_frame_count(0),m_lines(Vec4i(0,0,0,0),Vec4i(0,0,0,0),Vec4i(0,0,0,0)),m_classification() {
+		m_frame_count(0),m_lines(Vec4i(0,0,0,0),Vec4i(0,0,0,0),Vec4i(0,0,0,0)),m_classification(),m_dataToDriver() {
        }
 
 	LaneDetectionData::LaneDetectionData(const LaneDetectionData &obj) :
-			SerializableData(),m_frame_count(obj.m_frame_count),
-			m_lines(obj.m_lines),m_classification(obj.m_classification) {}
+			SerializableData(),
+			m_frame_count(obj.m_frame_count),
+			m_lines(obj.m_lines),
+			m_classification(obj.m_classification),
+			m_dataToDriver(obj.m_dataToDriver) {}
 
 	LaneDetectionData::~LaneDetectionData() {}
 
@@ -35,15 +38,20 @@ namespace msv {
 		m_lines = obj.m_lines;
 		m_frame_count=obj.m_frame_count;
 		m_classification=obj.m_classification;
+		m_dataToDriver=obj.m_dataToDriver;
 		return (*this);
 	}
 
 	Lines LaneDetectionData::getLaneDetectionData() const {
 		return m_lines;
 	}
+	LaneDetectorDataToDriver LaneDetectionData::getLaneDetectionDataDriver() const {
+			return m_dataToDriver;
+		}
 
-	void LaneDetectionData::setLaneDetectionData(const Lines &lines) {
+	void LaneDetectionData::setLaneDetectionData(const Lines &lines, const LaneDetectorDataToDriver &dataToDriver) {
 		m_lines = lines;
+		m_dataToDriver = dataToDriver;
 	}
 
 	uint32_t LaneDetectionData::getFrameCount() const {
@@ -106,6 +114,9 @@ namespace msv {
 		s.write(CRC32 < OPENDAVINCI_CORE_STRINGLITERAL7('c', 'l', 'a', 's', 's', 'i', 'f') >::RESULT,
 						m_classification);
 
+		s.write(CRC32 < OPENDAVINCI_CORE_STRINGLITERAL7('d', 'a', 't', 'a', 't', 'o', 'd') >::RESULT,
+						(void*)&m_dataToDriver, sizeof(m_dataToDriver));
+
 		return out;
 	}
 
@@ -121,6 +132,9 @@ namespace msv {
 
 		d.read(CRC32 < OPENDAVINCI_CORE_STRINGLITERAL7('c', 'l', 'a', 's', 's', 'i', 'f') >::RESULT,
 						m_classification);
+
+		d.read(CRC32 < OPENDAVINCI_CORE_STRINGLITERAL7('d', 'a', 't', 'a', 't', 'o', 'd') >::RESULT,
+						(void*)&m_dataToDriver, sizeof(m_dataToDriver));
 
 		return in;
 	}
