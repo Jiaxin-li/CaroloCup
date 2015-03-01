@@ -32,7 +32,7 @@ ADD_EXECUTABLE (VCR "${CMAKE_CURRENT_SOURCE_DIR}/apps/MainModule.cpp")
 TARGET_LINK_LIBRARIES (VCR VCRlib ${CCDATA_LIBS} ${OPENDAVINCI_LIBS} ${LIBS} ${OpenCV_LIBS}) 
 
 # Recipe for installing "VCR".
-INSTALL(TARGETS VCR RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
+INSTALL(TARGETS VCR RUNTIME DESTINATION bin/2015/CaroloCup) 
 
 # Enable CxxTest for all available testsuites.
 IF(CXXTEST_FOUND)

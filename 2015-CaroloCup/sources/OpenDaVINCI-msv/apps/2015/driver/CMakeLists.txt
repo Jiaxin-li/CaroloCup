@@ -33,9 +33,9 @@ TARGET_LINK_LIBRARIES (obstacledriver odriverlib ${MSVDATA_LIBS} ${OPENDAVINCI_L
 
 
 # Recipe for installing "driver".
-INSTALL(TARGETS driver RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
-INSTALL(TARGETS lanedriver RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
-INSTALL(TARGETS obstacledriver RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
+INSTALL(TARGETS driver RUNTIME DESTINATION bin/2015/CaroloCup) 
+INSTALL(TARGETS lanedriver RUNTIME DESTINATION bin/2015/CaroloCup) 
+INSTALL(TARGETS obstacledriver RUNTIME DESTINATION bin/2015/CaroloCup) 
 
 # Enable CxxTest for all available testsuites.
 IF(CXXTEST_FOUND)

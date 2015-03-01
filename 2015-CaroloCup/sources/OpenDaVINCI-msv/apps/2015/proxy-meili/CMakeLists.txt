@@ -18,7 +18,7 @@ ADD_EXECUTABLE (proxymeili "${CMAKE_CURRENT_SOURCE_DIR}/apps/MainModule.cpp")
 TARGET_LINK_LIBRARIES (proxymeili proxymeililib ${MSVDATA_LIBS} ${OPENDAVINCI_LIBS} ${LIBS}) 
 
 # Recipe for installing "proxymeili".
-INSTALL(TARGETS proxymeili RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
+INSTALL(TARGETS proxymeili RUNTIME DESTINATION bin/2015/CaroloCup) 
 
 # Enable CxxTest for all available testsuites.
 IF(CXXTEST_FOUND)

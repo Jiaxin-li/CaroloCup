@@ -43,10 +43,10 @@ ADD_EXECUTABLE (lanedetector-inspection "${CMAKE_CURRENT_SOURCE_DIR}/apps/Inspec
 TARGET_LINK_LIBRARIES (lanedetector-inspection lanedetectorlib ${MSVDATA_LIBS} ${OPENDAVINCI_LIBS} ${LIBS} ${OpenCV_LIBS}) 
 
 # Recipe for installing "lanedetector".
-INSTALL(TARGETS lanedetector RUNTIME DESTINATION bin/2013/DIT-168/project-template)
-INSTALL(TARGETS lanedetector2csvextractor RUNTIME DESTINATION bin/2013/DIT-168/project-template)
+INSTALL(TARGETS lanedetector RUNTIME DESTINATION bin/2015/CaroloCup)
+INSTALL(TARGETS lanedetector2csvextractor RUNTIME DESTINATION bin/2015/CaroloCup)
 #manual inspection
-INSTALL(TARGETS lanedetector-inspection RUNTIME DESTINATION bin/2013/DIT-168/project-template)
+INSTALL(TARGETS lanedetector-inspection RUNTIME DESTINATION bin/2015/CaroloCup)
 
 
 # Enable CxxTest for all available testsuites.

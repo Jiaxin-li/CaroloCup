@@ -39,7 +39,7 @@ ADD_EXECUTABLE (proxy "${CMAKE_CURRENT_SOURCE_DIR}/apps/MainModule.cpp")
 TARGET_LINK_LIBRARIES (proxy proxylib ${MSVDATA_LIBS} ${OPENDAVINCI_LIBS} ${LIBS} ${OpenCV_LIBS} ${UEYE_LIBS}) 
 
 # Recipe for installing "proxy".
-INSTALL(TARGETS proxy RUNTIME DESTINATION bin/2013/DIT-168/project-template) 
+INSTALL(TARGETS proxy RUNTIME DESTINATION bin/2015/CaroloCup) 
 
 # Enable CxxTest for all available testsuites.
 IF(CXXTEST_FOUND)
