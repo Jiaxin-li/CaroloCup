@@ -12,6 +12,7 @@
 #include "core/base/ConferenceClientModule.h"
 #include "core/data/Container.h"
 #include "core/data/TimeStamp.h"
+#include "core/base/FIFOQueue.h"
 
 
 namespace msv {
@@ -61,6 +62,10 @@ namespace msv {
             virtual void setUp();
 
             virtual void tearDown();
+
+        private:
+            ofstream loggerStream;
+            TimeStamp initTimestamp;
 
     };
 

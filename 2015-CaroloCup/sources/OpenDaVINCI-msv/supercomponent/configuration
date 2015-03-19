@@ -287,6 +287,13 @@ proxy-STM32F4.sensor5.address = 680                 # Enter here the address tha
 proxy-STM32F4.sensor5.clampDistance = 0.4           # Any distances greater than this distance will be ignored and -1 will be returned.
 
 
+
+#
+#Configuration for logger
+#
+logger.log=yes	#This will turn ON or OFF the logger
+logger.level=INFO	#This decides the level of logging required. WARN, DEBUG,INFO
+
 #
 # CONFIGURATION FOR MONITOR
 #

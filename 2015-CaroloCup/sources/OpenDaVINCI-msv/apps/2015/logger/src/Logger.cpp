@@ -20,10 +20,7 @@
 #include "core/base/Lock.h"
 #include "core/base/Mutex.h"
 
-
 #include "Logger.h"
-
-
 
 namespace msv {
 
@@ -32,10 +29,10 @@ using namespace core::base;
 using namespace core::data;
 using namespace core::data::control;
 
-
 Logger::Logger(const int32_t &argc, char **argv) :
-		ConferenceClientModule(argc, argv, "logger")
-		{
+		ConferenceClientModule(argc, argv, "logger"),
+		loggerStream(),
+		initTimestamp(){
 
 }
 
@@ -44,38 +41,33 @@ Logger::~Logger() {
 
 void Logger::setUp() {
 	// This method will be call automatically _before_ running body().
-	if (getFrequency() < 20) {
-		cerr << endl << endl
-				<< "Logger: WARNING! Running Logger with a LOW frequency (consequence: data updates are too seldom and will influence your algorithms in a negative manner!) --> suggestions: --freq=20 or higher! Current frequency: "
-				<< getFrequency() << " Hz." << endl << endl << endl;
-	}
-	
+
+	stringstream loggerName;
+	loggerName<<"Logging_"<<TimeStamp().getYYYYMMDD_HHMMSS()<<".log";
+	loggerStream.open(loggerName.str().c_str(),ios::out | ios::app);
 
 }
-
 
 void Logger::tearDown() {
 	// This method will be call automatically _after_ return from body().
-	
+	//log("TearDown.");
+	loggerStream.close();
 }
-
-
-
 
 // This method will do the main data processing job.
 ModuleState::MODULE_EXITCODE Logger::body() {
-
-
-
-
-	
-
+	FIFOQueue m_fifo;
+	addDataStoreFor(m_fifo);
 	while (getModuleState() == ModuleState::RUNNING) {
-		// Capture frame.
-		
+
+		while (!m_fifo.isEmpty()) {
+		    Container c = m_fifo.leave();
+		    if (c.getDataType()==USER_DATA_9) {
+				c.getData<>();
+			}
+		}
 	}
 
-	
 	return ModuleState::OKAY;
 }
 } // msv
