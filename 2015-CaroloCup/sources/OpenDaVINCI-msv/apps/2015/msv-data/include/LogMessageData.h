@@ -20,7 +20,6 @@ namespace msv {
 	class LogMessageData : public core::data::SerializableData {
 		public:
 			LogMessageData();
-			LogMessageData(const string &comp);
 
 			virtual ~LogMessageData();
 	

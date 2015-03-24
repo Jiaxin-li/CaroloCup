@@ -52,8 +52,9 @@ Proxy::Proxy(const int32_t &argc, char **argv) :
 		m_useRealSpeed(false),
 		logger(),
 		timestamp(),
-		msg("proxy")
+		msg()
 		{
+	msg.setComponent("Proxy");
 
 }
 

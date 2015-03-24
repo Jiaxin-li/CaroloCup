@@ -23,13 +23,6 @@ namespace msv {
 		, m_msg("")
 	{}
 	
-	LogMessageData::LogMessageData(const string &comp):
-    	    SerializableData()
-    			, m_component(comp)
-    			, m_loglevel("")
-    			, m_msg("")
-    		{}
-
 	LogMessageData::LogMessageData(const LogMessageData &obj) :
 	    SerializableData()
 		, m_component(obj.m_component)
