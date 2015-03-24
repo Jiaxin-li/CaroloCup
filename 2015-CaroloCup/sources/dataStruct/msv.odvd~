@@ -1,0 +1,10 @@
+package msv;
+
+message LogMessagaData {
+
+string component;
+string loglevel;
+string msg;
+
+
+}
