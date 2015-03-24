@@ -15,6 +15,7 @@
 #include "tools/recorder/Recorder.h"
 #include "ArduinoMegaProtocol.h"
 #include "SensorBoardData.h"
+#include "LogMessageData.h"
 
 #include "Camera.h"
 
@@ -96,6 +97,7 @@ namespace msv {
             bool m_useRealSpeed;
             ofstream logger;
             TimeStamp timestamp;
+            LogMessageData msg;
 
 
     };

@@ -21,6 +21,7 @@
 #include "core/base/Mutex.h"
 
 
+
 #include "Proxy.h"
 #include "sensorProtocol.h"
 
@@ -50,7 +51,8 @@ Proxy::Proxy(const int32_t &argc, char **argv) :
 		m_debug(false),
 		m_useRealSpeed(false),
 		logger(),
-		timestamp()
+		timestamp(),
+		msg("proxy")
 		{
 
 }
@@ -307,8 +309,13 @@ void Proxy::distribute(Container c) {
 
 void Proxy::log(const string &s)
 {
-	TimeStamp time=TimeStamp()-timestamp;
-	logger<<time.getSeconds()<<"."<<time.getFractionalMicroseconds() <<":"<<s<<endl;
+//	LogMessageData msg;
+//	msg.setComponent("Proxy");
+	msg.setLoglevel("INFO");
+	msg.setMsg(s);
+	Container logData(Container::USER_DATA_9, msg);
+	getConference().send(logData);
+
 }
 
 // This method will do the main data processing job.

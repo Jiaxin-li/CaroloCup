@@ -62,6 +62,7 @@ namespace msv {
             virtual void setUp();
 
             virtual void tearDown();
+            void log(const string &s,TimeStamp );
 
         private:
             ofstream loggerStream;

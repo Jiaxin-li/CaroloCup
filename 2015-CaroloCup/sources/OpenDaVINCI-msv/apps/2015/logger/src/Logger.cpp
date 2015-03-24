@@ -19,6 +19,7 @@
 #include "core/wrapper/SerialPort.h"
 #include "core/base/Lock.h"
 #include "core/base/Mutex.h"
+#include "LogMessageData.h"
 
 #include "Logger.h"
 
@@ -30,9 +31,7 @@ using namespace core::data;
 using namespace core::data::control;
 
 Logger::Logger(const int32_t &argc, char **argv) :
-		ConferenceClientModule(argc, argv, "logger"),
-		loggerStream(),
-		initTimestamp(){
+		ConferenceClientModule(argc, argv, "logger"), loggerStream(), initTimestamp() {
 
 }
 
@@ -43,14 +42,14 @@ void Logger::setUp() {
 	// This method will be call automatically _before_ running body().
 
 	stringstream loggerName;
-	loggerName<<"Logging_"<<TimeStamp().getYYYYMMDD_HHMMSS()<<".log";
-	loggerStream.open(loggerName.str().c_str(),ios::out | ios::app);
-
+	loggerName << "Logging_" << TimeStamp().getYYYYMMDD_HHMMSS() << ".log";
+	loggerStream.open(loggerName.str().c_str(), ios::out | ios::app);
+	log("Begin Logging",TimeStamp());
 }
 
 void Logger::tearDown() {
 	// This method will be call automatically _after_ return from body().
-	//log("TearDown.");
+	log("TearDown.",TimeStamp());
 	loggerStream.close();
 }
 
@@ -61,14 +60,30 @@ ModuleState::MODULE_EXITCODE Logger::body() {
 	while (getModuleState() == ModuleState::RUNNING) {
 
 		while (!m_fifo.isEmpty()) {
-		    Container c = m_fifo.leave();
-		    if (c.getDataType()==USER_DATA_9) {
-				c.getData<>();
+			Container c = m_fifo.leave();
+			if (c.getDataType() == Container::USER_DATA_9) {
+				LogMessageData logData = c.getData<LogMessageData>();
+				{
+					string level = logData.getLoglevel();
+					string msg = logData.getMsg();
+					string component = logData.getComponent();
+					stringstream logs;
+					logs << "[" << component << "];["
+							<< level << "];" << msg << endl;
+
+					log(logs.str(),c.getSentTimeStamp());
+				}
 			}
 		}
 	}
 
 	return ModuleState::OKAY;
+}
+
+void Logger::log(const string &s, TimeStamp timeSent) {
+	TimeStamp time = timeSent - initTimestamp;
+	loggerStream << "["<<
+	time.getSeconds() << "." << time.getFractionalMicroseconds() << "]:" << s << endl;
 }
 } // msv
 
