@@ -23,6 +23,8 @@ mv $PATH_ARG/$DIR $PATH_ARG/${COMPONENT_NAME,}
 
 find $PATH_ARG/$COMPONENT_NAME/ -type f -exec sed -i -e 's/nameSpace/'$NAMESPACE'/g' {} \;
 find $PATH_ARG/$COMPONENT_NAME/ -type f -exec sed -i -e 's/COMPONENT/'${COMPONENT_NAME^^}'/g' {} \;
+find $PATH_ARG/$COMPONENT_NAME/ -type f -exec sed -i -e 's/Component/'${COMPONENT_NAME^}'/g' {} \;
+
 
 sed -i 's/component/'${COMPONENT_NAME,}'/g' $PATH_ARG/${COMPONENT_NAME,}/CMakeLists.txt
 
@@ -30,4 +32,4 @@ mv $PATH_ARG/${COMPONENT_NAME,}/include/Component.h $PATH_ARG/${COMPONENT_NAME,}
 mv $PATH_ARG/${COMPONENT_NAME,}/src/Component.cpp $PATH_ARG/${COMPONENT_NAME,}/src/${COMPONENT_NAME^}.cpp
 mv $PATH_ARG/${COMPONENT_NAME,}/testsuites/ComponentTestSuite.h $PATH_ARG/${COMPONENT_NAME,}/testsuites/${COMPONENT_NAME^}TestSuite.h
 
-echo $COMPONENT_NAME " files generated at " $PATH_ARG
+echo $COMPONENT_NAME " files generated at " $PATH_ARG/$COMPONENT_NAME
