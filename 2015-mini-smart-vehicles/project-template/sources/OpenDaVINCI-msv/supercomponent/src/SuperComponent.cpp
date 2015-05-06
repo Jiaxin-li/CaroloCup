@@ -39,6 +39,8 @@
 #include "SuperComponent.h"
 #include "ConnectedModule.h"
 
+ #include "tools/logger/Logger.h"
+
 namespace supercomponent {
 
     using namespace core::base;
@@ -107,6 +109,10 @@ namespace supercomponent {
         m_conference->setContainerListener(this);
 
         cout << "(supercomponent) Ready - managed level " << m_managedLevel << endl;
+        string argg= getIdentifier();
+       //char &arg; arg= 'cid=111';
+        tools::logger::Logger l(argc,argv);
+        l.runModule();
     }
 
     SuperComponent::~SuperComponent() {
@@ -215,7 +221,8 @@ namespace supercomponent {
         vector<Container> containersToBeDistributedToModules;
 
         m_lastCycle = TimeStamp();
-        while (getModuleState() == ModuleState::RUNNING) {
+        while (getModuleState() == ModuleState::RUNNING)
+         {
             TimeStamp current;
             m_startOfCurrentCycle = current;
             m_startOfLastCycle = m_lastCycle;
@@ -229,6 +236,8 @@ namespace supercomponent {
 
             // Remove disconnected modules.
             m_shutdownModules.deleteAllModules();
+
+            
 
             if (m_managedLevel == core::dmcp::ServerInformation::ML_NONE) {
                 // Just sleep 2 seconds in the case of managed level == NONE.

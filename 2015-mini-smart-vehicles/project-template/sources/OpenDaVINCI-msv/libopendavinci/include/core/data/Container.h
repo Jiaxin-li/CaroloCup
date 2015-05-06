@@ -53,6 +53,7 @@ namespace core {
                     SHARED_DATA                  = 13,
                     SHARED_IMAGE                 = 14,
                     POSITION                     = 15,
+                    LOGGER                       = 16,
 
                     CONTOUREDOBJECT              = 30,
                     CONTOUREDOBJECTS             = 31,

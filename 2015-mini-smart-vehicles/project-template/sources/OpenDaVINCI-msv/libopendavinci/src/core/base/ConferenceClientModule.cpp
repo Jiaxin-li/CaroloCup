@@ -39,7 +39,8 @@ namespace core {
                 m_dataStoresMutex(),
                 m_listOfDataStores(),
                 m_mapOfListOfDataStores(),
-                m_keyValueDataStore() {
+                m_keyValueDataStore(),
+                m_logMessage() {
             // Create an in-memory database.
             m_keyValueDataStore = SharedPointer<KeyValueDataStore>(new KeyValueDataStore(wrapper::KeyValueDatabaseFactory::createKeyValueDatabase("")));
             ContainerConference *containerConference = ContainerConferenceFactory::getInstance().getContainerConference(getMultiCastGroup());
@@ -117,6 +118,12 @@ namespace core {
             m_mapOfListOfDataStores[datatype] = listOfDataStores;
         }
 
+        void ConferenceClientModule::logData(string &s){
+            m_logMessage.setComponent(getName());
+            m_logMessage.setMsg(s);
+            Container logMsg(Container::LOGGER, m_logMessage);
+            getConference().send(logMsg);
+        }
         KeyValueDataStore& ConferenceClientModule::getKeyValueDataStore() {
             return *m_keyValueDataStore;
         }

@@ -26,6 +26,7 @@
 #include "core/SharedPointer.h"
 #include "core/base/Mutex.h"
 #include "core/data/Container.h"
+#include "core/data/logger/LogMessageData.h"
 #include "core/exceptions/Exceptions.h"
 #include "core/io/ContainerConference.h"
 #include "core/io/ContainerListener.h"
@@ -141,6 +142,8 @@ namespace core {
 
                 virtual core::base::KeyValueDataStore& getKeyValueDataStore();
 
+                virtual void logData(string&);
+
             private:
                 void setupContainerConference();
 
@@ -151,6 +154,7 @@ namespace core {
 
                 // Store all received data using Container::DATATYPE as key.
                 core::SharedPointer<core::base::KeyValueDataStore> m_keyValueDataStore;
+                core::data::logger::LogMessageData m_logMessage;
         };
 
     }
