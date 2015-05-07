@@ -11,7 +11,7 @@ SET (OpenCV_LIBS opencv_core opencv_imgproc opencv_highgui)
 
 # Include directories from core.
 INCLUDE_DIRECTORIES (${libopendavinci_SOURCE_DIR}/include)
-INCLUDE_DIRECTORIES (../cc-data/include)
+INCLUDE_DIRECTORIES (${libdata_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (include)
 
 IF("${PANDABOARD}" STREQUAL "YES")

@@ -8,6 +8,7 @@ PROJECT (recintegrity)
 
 # Include directories from core.
 INCLUDE_DIRECTORIES (${libopendavinci_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES (${libdata_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (include)
 
 # Recipe for building "recintegrity".

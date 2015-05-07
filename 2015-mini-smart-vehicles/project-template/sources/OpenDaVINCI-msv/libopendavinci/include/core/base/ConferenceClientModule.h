@@ -32,6 +32,7 @@
 
 #include "core/base/ManagedClientModule.h"
 #include "core/base/DataStoreManager.h"
+ #include "GeneratedHeaders_Data.h"
 
 namespace core {
     namespace base {
@@ -141,6 +142,8 @@ namespace core {
 
                 virtual core::base::KeyValueDataStore& getKeyValueDataStore();
 
+                void logData(msv::LogMessageData::LogLevel , const string&);
+
             private:
                 void setupContainerConference();
 
@@ -151,6 +154,8 @@ namespace core {
 
                 // Store all received data using Container::DATATYPE as key.
                 core::SharedPointer<core::base::KeyValueDataStore> m_keyValueDataStore;
+
+                msv::LogMessageData m_logMessage;
         };
 
     }

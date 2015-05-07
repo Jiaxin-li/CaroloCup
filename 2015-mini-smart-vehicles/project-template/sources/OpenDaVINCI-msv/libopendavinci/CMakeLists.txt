@@ -27,6 +27,7 @@ ENDIF("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
 ###############################################################################
 # Set include directories (config.h is generated to ${CMAKE_CURRENT_BINARY_DIR}/include/core").
 INCLUDE_DIRECTORIES (${CMAKE_CURRENT_BINARY_DIR}/include)
+INCLUDE_DIRECTORIES (${libdata_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (include)
 
 LINK_DIRECTORIES (${zlib_BINARY_DIR})
@@ -66,7 +67,7 @@ ENDIF()
 
 ###############################################################################
 ADD_LIBRARY (opendavinci STATIC ${libopendavinci-sources})
-TARGET_LINK_LIBRARIES(opendavinci ${THIRDPARTY_LIBS})
+TARGET_LINK_LIBRARIES(opendavinci ${THIRDPARTY_LIBS} ${DATA_LIBS})
 
 ###############################################################################
 # Recipe for installing "libopendavinci".

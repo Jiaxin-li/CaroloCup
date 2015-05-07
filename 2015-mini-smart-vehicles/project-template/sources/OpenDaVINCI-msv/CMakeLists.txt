@@ -57,10 +57,11 @@ ENDIF(CXXTEST_FOUND)
 
 # Add subdirectories.
 ADD_SUBDIRECTORY (3rdParty)
-ADD_SUBDIRECTORY (libopendavinci)
-
 ADD_SUBDIRECTORY (libdata)
 SET (DATA_LIBS data)
+ADD_SUBDIRECTORY (libopendavinci)
+
+
 
 IF(UNIX)
     # Don't build the graphical environment and the vehiclecontext on Darwin.

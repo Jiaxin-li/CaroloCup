@@ -8,13 +8,14 @@ PROJECT (supercomponent)
 
 # Include directories from core.
 INCLUDE_DIRECTORIES (${libopendavinci_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES (${libdata_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (include)
 
 # Recipe for building "supercomponent".
 FILE(GLOB_RECURSE supercomponent-sources "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 ADD_LIBRARY (supercomponentlib STATIC ${supercomponent-sources})
 ADD_EXECUTABLE (supercomponent "${CMAKE_CURRENT_SOURCE_DIR}/apps/supercomponent.cpp")
-TARGET_LINK_LIBRARIES (supercomponent supercomponentlib ${OPENDAVINCI_LIBS} ${LIBS}) 
+TARGET_LINK_LIBRARIES (supercomponent supercomponentlib ${OPENDAVINCI_LIBS} ${LIBS} ${DATA_LIBS}) 
 
 # Recipe for installing "supercomponent".
 INSTALL(TARGETS supercomponent RUNTIME DESTINATION bin)

@@ -11,6 +11,7 @@ SET (LIBS ${LIBS} GL GLU glut)
 # Include directories from core.
 INCLUDE_DIRECTORIES (${libopendavinci_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (${libhesperia_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES (${libdata_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES (include)
 
 # Recipe for building "chasecar".

@@ -171,6 +171,8 @@ namespace core {
                     return "SharedImage";
                 case POSITION:
                     return "Position";
+                case LOGGER:
+                    return "Logger";
                 case CONTOUREDOBJECT:
                     return "ContouredObject";
                 case CONTOUREDOBJECTS:

@@ -36,3 +36,14 @@ message msv.SensorBoardData {
     map<uint32, double> distances;
 }
 
+message msv.LogMessageData {
+    enum LogLevel {
+        INFO = 1,
+        WARN = 2,
+        DEBUG = 3 ,
+    };
+    LogLevel logLevel;
+    string logMessage;
+    string componentName;
+}
+

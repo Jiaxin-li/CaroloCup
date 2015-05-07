@@ -46,6 +46,8 @@
 #include "ConnectedModule.h"
 #include "ConnectedModules.h"
 
+ #include "GeneratedHeaders_Data.h"
+
 namespace supercomponent {
 
     using namespace std;
@@ -143,6 +145,7 @@ namespace supercomponent {
             uint32_t m_yieldMicroseconds;
 
             vector<string> m_modulesToIgnore;
+            ofstream loggerStream;
     };
 }
 

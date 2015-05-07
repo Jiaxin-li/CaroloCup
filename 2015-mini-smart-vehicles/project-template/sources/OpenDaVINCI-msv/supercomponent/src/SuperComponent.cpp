@@ -68,7 +68,8 @@ namespace supercomponent {
         m_shiftMicroseconds(0),
         m_timeoutACKMilliseconds(0),
         m_yieldMicroseconds(0),
-        m_modulesToIgnore() {
+        m_modulesToIgnore(),
+        loggerStream() {
         // Check for any running supercomponents.
         checkForSuperComponent();
 
@@ -107,9 +108,18 @@ namespace supercomponent {
         m_conference->setContainerListener(this);
 
         cout << "(supercomponent) Ready - managed level " << m_managedLevel << endl;
+
+        stringstream loggerName;
+        loggerName << "Log_" << TimeStamp().getYYYYMMDD_HHMMSS() << ".log";
+        loggerStream.open(loggerName.str().c_str(), ios::out | ios::app);
     }
 
     SuperComponent::~SuperComponent() {
+        if(loggerStream !=NULL)
+        {
+            loggerStream.flush();
+        }
+        loggerStream.close();
     }
 
     const TimeStamp SuperComponent::getStartOfCurrentCycle() const {
@@ -398,6 +408,16 @@ namespace supercomponent {
         cout << "Received unknown container " << container.toString() << "from " << md.toString() << endl;
     }
 
-    void SuperComponent::nextContainer(Container &/*container*/) {}
+    void SuperComponent::nextContainer(Container &container) {
+        if(container.getDataType()==Container::LOGGER)
+        {
+            msv::LogMessageData logMessageData = container.getData<msv::LogMessageData>();
+            loggerStream <<   TimeStamp().getSeconds()<< ";"<< logMessageData.getComponentName() << ";"
+                                    << logMessageData.getLogLevel() << ";" << logMessageData.getLogMessage()<<";" << endl;
+
+           // cout <<   TimeStamp() << ";"<< logMessageData.getComponentName() << ";"
+              //                      << logMessageData.getLogLevel() << ";" << logMessageData.getLogMessage()<<";" << endl;
+        }
+}
     
 } // supercomponent
