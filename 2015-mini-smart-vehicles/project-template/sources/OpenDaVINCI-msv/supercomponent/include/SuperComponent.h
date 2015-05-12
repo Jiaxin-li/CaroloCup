@@ -146,6 +146,7 @@ namespace supercomponent {
 
             vector<string> m_modulesToIgnore;
             ofstream loggerStream;
+            bool loggingEnabled;
     };
 }
 
