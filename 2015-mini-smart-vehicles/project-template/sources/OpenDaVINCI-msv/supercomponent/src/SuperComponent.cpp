@@ -69,7 +69,8 @@ namespace supercomponent {
         m_timeoutACKMilliseconds(0),
         m_yieldMicroseconds(0),
         m_modulesToIgnore(),
-        loggerStream() {
+        loggerStream(),
+        loggingEnabled(true) {
         // Check for any running supercomponents.
         checkForSuperComponent();
 
@@ -109,9 +110,7 @@ namespace supercomponent {
 
         cout << "(supercomponent) Ready - managed level " << m_managedLevel << endl;
 
-        stringstream loggerName;
-        loggerName << "Log_" << TimeStamp().getYYYYMMDD_HHMMSS() << ".log";
-        loggerStream.open(loggerName.str().c_str(), ios::out | ios::app);
+
     }
 
     SuperComponent::~SuperComponent() {
@@ -133,8 +132,24 @@ namespace supercomponent {
     void SuperComponent::parseAdditionalCommandLineParameters(const int &argc, char **argv) {
         CommandLineParser cmdParser;
         cmdParser.addCommandLineArgument("managed");
+        cmdParser.addCommandLineArgument("logging");
 
         cmdParser.parse(argc, argv);
+
+        CommandLineArgument cmdArgumentLOGGING = cmdParser.getCommandLineArgument("logging");
+        if(cmdArgumentLOGGING.isSet())
+        {
+               loggingEnabled = cmdArgumentLOGGING.getValue<int32_t>() == 1;
+        }
+        if(loggingEnabled)
+        {
+                    stringstream loggerName;
+                    loggerName << "Log_" << TimeStamp().getYYYYMMDD_HHMMSS() << ".log";
+                    loggerStream.open(loggerName.str().c_str(), ios::out | ios::app);
+                    loggerStream<<"Timestamp" << ";" << "ComponentName" << ";" << "LogLevel" << ";" << "Message" <<endl;
+                    loggerStream.flush();
+        }
+ 
 
         CommandLineArgument cmdArgumentMANAGED = cmdParser.getCommandLineArgument("managed");
 
@@ -409,14 +424,12 @@ namespace supercomponent {
     }
 
     void SuperComponent::nextContainer(Container &container) {
-        if(container.getDataType()==Container::LOGGER)
+        if(loggingEnabled && container.getDataType()==Container::LOGGER)
         {
             msv::LogMessageData logMessageData = container.getData<msv::LogMessageData>();
             loggerStream <<   TimeStamp().getSeconds()<< ";"<< logMessageData.getComponentName() << ";"
                                     << logMessageData.getLogLevel() << ";" << logMessageData.getLogMessage()<<";" << endl;
-
-           // cout <<   TimeStamp() << ";"<< logMessageData.getComponentName() << ";"
-              //                      << logMessageData.getLogLevel() << ";" << logMessageData.getLogMessage()<<";" << endl;
+            loggerStream.flush();
         }
 }
     
