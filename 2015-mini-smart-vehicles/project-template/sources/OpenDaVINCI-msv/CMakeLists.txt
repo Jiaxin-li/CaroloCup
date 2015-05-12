@@ -58,7 +58,7 @@ ENDIF(CXXTEST_FOUND)
 # Add subdirectories.
 ADD_SUBDIRECTORY (3rdParty)
 ADD_SUBDIRECTORY (libdata)
-SET (DATA_LIBS data)
+
 ADD_SUBDIRECTORY (libopendavinci)
 
 

@@ -20,3 +20,4 @@ SET (THIRDPARTY_LIBS ${THIRDPARTY_LIBS} ziplib zlib dblib)
 
 # Set libraries to link.
 SET (OPENDAVINCI_LIBS opendavinci)
+SET (DATA_LIBS data)
